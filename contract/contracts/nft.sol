@@ -34,7 +34,7 @@ contract CryptoDev is ERC721Enumerable, Ownable {
           require(!_paused, "Contract currently paused");
         _;
 }
-    constructor (string memory baseURI, address whitelistContract) ERC721("Crypto Devs", "CD") {
+  constructor (string memory baseURI, address whitelistContract) ERC721("Crypto Devs", "CD") {
         _baseTokenURI = baseURI;
         whitelist = IWhitelist(whitelistContract);
   }

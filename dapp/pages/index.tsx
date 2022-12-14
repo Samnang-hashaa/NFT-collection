@@ -344,9 +344,9 @@ export default function Home() {
     </Head>
     <div className={styles.main}>
       <div>
-        <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
+        <h1 className={styles.title}>Welcome to SadBOi NFT-Collection! </h1>
         <div className={styles.description}>
-          Its an NFT collection for developers in Crypto.
+          It's an NFT collection for Bors Smos in Crypto.
         </div>
         <div className={styles.description}>
           {tokenIdsMinted}/20 have been minted
@@ -359,7 +359,7 @@ export default function Home() {
     </div>
 
     <footer className={styles.footer}>
-      Made with &#10084; by Crypto Devs
+      Made with &#10084; by Bors Besdong Smos
     </footer>
   </div>
   );

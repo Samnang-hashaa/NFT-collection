@@ -11,7 +11,7 @@ export default function Home() {
     // walletConnected kepp track of whether the user's wallet is connected or not
     const [walletConnected, setWalletConnected] = useState(false);
     // presaleStarted keeps track of whether the presale has started or not 
-    const [presaleStarted, setPresalesStarted] = useState(false);
+    const [presaleStarted, setPresaleStarted] = useState(false);
     // presaleEnded keeps track of wherther the presale ended
     const [presaleEnded, setPresalesEndend] = useState(false);
     // loading is set to true when we are waiting for transaction to get mined
@@ -103,27 +103,6 @@ export default function Home() {
       }
     };
 
-  
-  const getProviderorSigner = async (needSigner = false)=> {
-    //Connect to Metamask
-    //Since we store ' Web3Modal' as a reference, we need to access the 'current' value to get access to underlying object
-    const provider = await web3ModalRef.current.connect();
-    const web3Provider = new providers.Web3Provider(provider);
-
-    // if user is not connect to the Goerli network, let them know and throw an error
-    const { chainId } = await web3Provider.getNetwork();
-    if ( chainId !==5 ) {
-      window.alert("Change the network to Goerli");
-      throw new Error ("Change network to Goerli");
-    }
-
-    if(needSigner) {
-      const signer = web3Provider.getSigner();
-      return signer;
-    }
-    return web3Provider;
-  }
-
   // CheckIfPresaleStarted: checks if the presale has started by quering the 'presale'
   // varriable in the contact
   const checkIfPresaleStarted = async () => {
@@ -140,7 +119,7 @@ export default function Home() {
         await getOwner();
 
       }
-      setPresalesStarted(_presaleStarted);
+      setPresaleStarted(_presaleStarted);
       return _presaleStarted;
 
 
@@ -149,6 +128,8 @@ export default function Home() {
       return false;
     }
   }
+
+
 
   const checkIfPresaleEnded = async () => {
     try {
@@ -188,10 +169,10 @@ export default function Home() {
         // Call the owner function from the Contract
         const _owner = await nftContract.owner();
         // We will get the signer now to extract the address of the currently connected MetaMask account
-        const signer : any = await getProviderorSigner();
+        const signer: providers.JsonRpcSigner = await getSigner();
         // Get the address asscociated to the signer which is connected to metaMask
-        const address : any = await signer.getAddress();
-        if (address.toLowerCase() === _owner.toLowerCase) {
+        const address  = await signer.getAddress();
+        if (address.toLowerCase() === _owner.toLowerCase()) {
           setIsOwner(true);
         }
   
@@ -218,6 +199,43 @@ export default function Home() {
       }
     }
 
+    const getProviderorSigner = async (needSigner = false) => {
+      //Connect to Metamask
+      //Since we store ' Web3Modal' as a reference, we need to access the 'current' value to get access to underlying object
+      const provider = await web3ModalRef.current.connect();
+      const web3Provider = new providers.Web3Provider(provider);
+  
+      // if user is not connect to the Goerli network, let them know and throw an error
+      const { chainId } = await web3Provider.getNetwork();
+      if (chainId !== 5) {
+        window.alert("Change the network to Goerli");
+        throw new Error ("Change network to Goerli");
+      }
+  
+      if(needSigner) {
+        const signer = web3Provider.getSigner();
+        return signer;
+      }
+      return web3Provider;
+    }
+
+    const getSigner = async () => {
+      //Connect to Metamask
+      //Since we store ' Web3Modal' as a reference, we need to access the 'current' value to get access to underlying object
+      const provider = await web3ModalRef.current.connect();
+      const web3Provider = new providers.Web3Provider(provider);
+  
+      // if user is not connect to the Goerli network, let them know and throw an error
+      const { chainId } = await web3Provider.getNetwork();
+      if (chainId !== 5) {
+        window.alert("Change the network to Goerli");
+        throw new Error ("Change network to Goerli");
+      }
+  
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+
   // useEffects are used to react to changes in state of the website
   // The array at the end of function call represents what state changes will trigger this effect
   // In this case, whenever the value of `walletConnected` changes - this effect will be called
@@ -242,7 +260,7 @@ export default function Home() {
       getTokenIdsMinted();
 
       // Set an interval which gets called every 5 seconds to check presale has ended
-      const presaleEndedInterval :any  = setInterval(async function () {
+      const presaleEndedInterval = setInterval(async function () {
         const _presaleStarted = await checkIfPresaleStarted();
         if (_presaleStarted) {
           const _presaleEnded = await checkIfPresaleEnded();
@@ -336,7 +354,7 @@ export default function Home() {
         {renderButton()}
       </div>
       <div>
-        <img className={styles.image} src="./cryptodevs/0.svg" />
+        <img className={styles.image} src="./CryptoDev/1.svg" />
       </div>
     </div>
 

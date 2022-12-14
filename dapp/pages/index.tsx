@@ -346,7 +346,7 @@ export default function Home() {
       <div>
         <h1 className={styles.title}>Welcome to SadBOi NFT-Collection! </h1>
         <div className={styles.description}>
-          It's an NFT collection for Bors Smos in Crypto.
+          Its an NFT collection for Bors Smos in Crypto.
         </div>
         <div className={styles.description}>
           {tokenIdsMinted}/20 have been minted

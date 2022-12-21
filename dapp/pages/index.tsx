@@ -129,8 +129,6 @@ export default function Home() {
     }
   }
 
-
-
   const checkIfPresaleEnded = async () => {
     try {
       // Get the provider from web3Modal, which in our case is MetaMask

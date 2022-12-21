@@ -14,7 +14,7 @@ export default function handler(
  // get the tokenId from the query params
     const tokenId = req.query.tokenId;
     const name = "Crypto Dev #" + tokenId;
-    const description: string ="Crypto Dev is a collection of developers in crypto";
+    const description ="Crypto Dev is a collection of developers in crypto";
     // As all the images are uploaded on github, we can extract the images from github directly.
     const image_url =
       `https://raw.githubusercontent.com/LearnWeb3DAO/NFT-Collection/main/my-app/public/cryptodevs/${Number(tokenId) - 1}.svg`;
